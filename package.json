@@ -4,7 +4,7 @@
 	"description": "Mysql node library",
 	"main": "dist/index.js",
 	"scripts": {
-		"test": "mocha dist/index.js"
+		"test": "mocha test/index.js"
 	},
 	"keywords": [
 		"node",
