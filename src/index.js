@@ -86,7 +86,7 @@ module.exports = function(auth){
 		return self;
 	}
 
-	self.set = function(table,set,where=null,callback){
+	self.update = self.set = function(table,set,where=null,callback){
 		if(_.isPlainObject(set)) set = objToSQLArr(set);
 		if(_.isPlainObject(where)) where = objToSQLArr(where);
 		var sql = [
@@ -97,5 +97,6 @@ module.exports = function(auth){
 		self.query(sql.join(" "),callback);
 		return self;
 	}
+
 	return self;
 }

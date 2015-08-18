@@ -1,7 +1,8 @@
 # mQ node
 
 Mysql library inspired on [mQ.php](https://github.com/webcaetano/mQ). 
-Suporting JSON to create mysql queries.
+Suporting JSON to create mysql queries. 
+Using on module [node-mysql](https://github.com/felixge/node-mysql/)
 
 Example :
 
@@ -76,6 +77,53 @@ mq.insert('players','player="Lulu", goal=80');
 // return INSERT INTO players SET player="Lulu"
 ```
 
+## Update 
+
+mq.update(table[string or array],set [string, object or array],where [string, object or array],callback)
+
+mq.set // Alias
+
+```javascript
+mq.update('test',{goal:30},{player:'Janna'},function(data,err){
+})
+
+// return UPDATE test set goal=30 WHERE player="Janna"
+```
+
+## Select 
+
+mq.select(data[object],callback)
+
+mq.set // Alias
+
+```javascript
+mysql.select({
+	from:'test',
+	cols:['player','goal','id'],
+	where:{player:'Janna'}
+},function(data,err){
+})
+
+// RETURN SELECT player, goal, id FROM test WHERE player="Janna"
+
+// full data attributes
+
+mysql.select({
+	from:'test', // [string or array]
+	cols:['player','goal','id'], // [string or array]
+	where:{player:'Janna'}, // [string, array or object]
+	group:'goal', // [string or array]
+	order:'goal DESC', // [string or array]
+	limit:'0,10', // [string or array]
+	have:'player="Janna"', // [string or array]
+},function(data,err){
+})
+```
+
+## Node mysql object 
+
+mq.connection
+
 ## Install
 
 ```Batchfile
@@ -85,8 +133,8 @@ npm install mq-node
 
 ### Project Road : 
 
-- Finish documentation
-- Finish readme
+- Create table based on json (mq.table)
+
 
 ---------------------------------
 

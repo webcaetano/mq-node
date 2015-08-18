@@ -82,6 +82,11 @@ describe('mysql test', function() {
 		mysql.set('test',{goal:200},{player:'Darius'},function(data,err){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
+		})
+
+		mysql.update('test',{goal:30},{player:'Janna'},function(data,err){
+			expect(data).not.to.be.null;
+			expect(err).to.be.null;
 			done();
 		})
 	});

@@ -139,7 +139,7 @@ module.exports =
   		return self;
   	};
 
-  	self.set = function (table, set, where, callback) {
+  	self.update = self.set = function (table, set, where, callback) {
   		if (where === undefined) where = null;
 
   		if (_.isPlainObject(set)) set = objToSQLArr(set);
@@ -149,6 +149,7 @@ module.exports =
   		self.query(sql.join(" "), callback);
   		return self;
   	};
+
   	return self;
   };
 
