@@ -9,6 +9,22 @@ var mysql = require('../dist/')({
 
 describe('mysql test', function() {
 
+	function AnticipatedSyncFunction(){
+	  var ret;
+	  setTimeout(function(){
+	      ret = "hello";
+	  },3000);
+	  while(ret === undefined) {
+	    require('deasync').runLoopOnce();
+	  }
+	  return ret;
+	}
+
+
+	var output = AnticipatedSyncFunction();
+	//expected: output=hello (after waiting for 3 sec)
+	console.log("output="+output);
+
 	it('should be connected', function(done) {
 		mysql.connection.connect(function(err){
 			expect(mysql.connection.state).to.not.be.equal("disconnected");
