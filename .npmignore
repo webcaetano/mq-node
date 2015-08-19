@@ -5,3 +5,4 @@ gulp/
 gulpfile.js
 .editorconfig
 .travis.yml
+!dist/
