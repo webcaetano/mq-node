@@ -27,7 +27,7 @@ mq.insert('players',{
 mq.query(query[string],callback)
 
 ```javascript
-mq.query('SELECT 1+1 as s',function(data,err){
+mq.query('SELECT 1+1 as s',function(err,data){
 	//result data[0]['s'] 2
 })
 ```
@@ -37,17 +37,17 @@ mq.query('SELECT 1+1 as s',function(data,err){
 mq.delete(table[string or array], where[string, object or array],callback)
 
 ```javascript
-mq.delete('test',{player:'Janna'},function(data,err){
+mq.delete('test',{player:'Janna'},function(err,data){
 });
 
 // return DELETE FROM test where player="Janna"
 
-mq.delete('test',['player:"Janna"','score=100'},function(data,err){
+mq.delete('test',['player:"Janna"','score=100'},function(err,data){
 });
 
 // return DELETE FROM test where player="Janna" and score=100
 
-mq.delete('test','player:"Janna" or score=100',function(data,err){
+mq.delete('test','player:"Janna" or score=100',function(err,data){
 });
 
 // return DELETE FROM test where player="Janna" or score=100
@@ -84,7 +84,7 @@ mq.update(table[string or array],set [string, object or array],where [string, ob
 mq.set // Alias
 
 ```javascript
-mq.update('test',{goal:30},{player:'Janna'},function(data,err){
+mq.update('test',{goal:30},{player:'Janna'},function(err,data){
 })
 
 // return UPDATE test set goal=30 WHERE player="Janna"
@@ -101,7 +101,7 @@ mq.select({
 	from:'test',
 	cols:['player','goal','id'],
 	where:{player:'Janna'}
-},function(data,err){
+},function(err,data){
 })
 
 // RETURN SELECT player, goal, id FROM test WHERE player="Janna"
@@ -116,7 +116,7 @@ mq.select({
 	order:'goal DESC', // [string or array]
 	limit:'0,10', // [string or array]
 	have:'player="Janna"', // [string or array]
-},function(data,err){
+},function(err,data){
 })
 ```
 
