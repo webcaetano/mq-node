@@ -18,7 +18,7 @@ describe('mysql test', function() {
 	});
 
 	it('should create a database', function(done) {
-		mysql.query('CREATE DATABASE IF NOT EXISTS test',function(data,err){
+		mysql.query('CREATE DATABASE IF NOT EXISTS test',function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 			done();
@@ -38,7 +38,7 @@ describe('mysql test', function() {
 			'player varchar(32) NOT NULL,'+
 			'goal int(11) NOT NULL,'+
 			'PRIMARY KEY (id)'+
-		')',function(data,err){
+		')',function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 			done();
@@ -56,13 +56,13 @@ describe('mysql test', function() {
 
 		async.each(players,
 		function(player,callback){
-			mysql.insert('test',player,function(data,err){
+			mysql.insert('test',player,function(err,data){
 				expect(data).not.to.be.null;
 				expect(err).to.be.null;
 				callback();
 			})
 		},function(err,data){
-			mysql.query('select count(*) as q FROM test',function(data){
+			mysql.query('select count(*) as q FROM test',function(err,data){
 				expect(data[0]['q']).to.be.equal(5);
 				done();
 			})
@@ -70,7 +70,7 @@ describe('mysql test', function() {
 	});
 
 	it('should delete some rows', function(done) {
-		mysql.delete('test',{player:'Janna'},function(data,err){
+		mysql.delete('test',{player:'Janna'},function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 			done();
@@ -79,12 +79,12 @@ describe('mysql test', function() {
 
 
 	it('should update some rows', function(done) {
-		mysql.set('test',{goal:200},{player:'Darius'},function(data,err){
+		mysql.set('test',{goal:200},{player:'Darius'},function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 		})
 
-		mysql.update('test',{goal:30},{player:'Janna'},function(data,err){
+		mysql.update('test',{goal:30},{player:'Janna'},function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 			done();
@@ -96,7 +96,7 @@ describe('mysql test', function() {
 			from:'test',
 			cols:['player','goal','id'],
 			where:{player:'Janna'}
-		},function(data){
+		},function(err,data){
 			expect(data.length).to.be.equal(0);
 		})
 
@@ -104,7 +104,7 @@ describe('mysql test', function() {
 			from:'test',
 			cols:['player','goal','id'],
 			where:{player:'Darius'}
-		},function(data){
+		},function(err,data){
 			expect(data[0]['player']).to.be.equal('Darius');
 			expect(data[0]['goal']).to.be.equal(200);
 			done();
@@ -113,7 +113,7 @@ describe('mysql test', function() {
 
 
 	it('should drop table', function(done) {
-		mysql.query('DROP TABLE test',function(data,err){
+		mysql.query('DROP TABLE test',function(err,data){
 			expect(data).not.to.be.null;
 			expect(err).to.be.null;
 			done();

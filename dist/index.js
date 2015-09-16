@@ -93,7 +93,7 @@ module.exports =
 
   		c.query(sql, function (err, data) {
   			if (err) console.log(sql + " " + err);
-  			if (callback) callback.apply(null, [data, err]);
+  			if (callback) callback.apply(null, [err, data]);
   		});
   		return self;
   	};
