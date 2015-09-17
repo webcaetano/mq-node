@@ -130,12 +130,6 @@ mq.connection
 npm install mq-node
 ```
 
-
-### Project Road : 
-
-- Create table based on json (mq.table)
-
-
 ---------------------------------
 
 The MIT [License](https://raw.githubusercontent.com/webcaetano/mq-node/master/LICENSE.md)

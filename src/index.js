@@ -12,15 +12,11 @@ var strToArr = function(val){
 	return val;
 }
 
-var quoteStr = function(str){
-	return _.isNumber(str) ? str : '"'+str+'"';
-}
-
 var objToSQLArr = function(obj){
 	var r = [];
 	for(var i in obj){
 		if(_.isObject(obj[i]) || _.isArray(obj[i]) || _.isFunction(obj[i]) || _.isNaN(obj[i])) continue;
-		r.push(i+'='+quoteStr(obj[i]));
+		r.push(mysql.escape(i)+'='+mysql.escape(obj[i]));
 	}
 	return r;
 }
