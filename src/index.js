@@ -33,6 +33,8 @@ module.exports = function(auth){
 		return self;
 	}
 
+	self.escape = mysql.escape;
+
 	self.query = function(sql,callback=null){
 		c.query(sql,function(err,data){
 			if(err) console.log(sql+" "+err);
