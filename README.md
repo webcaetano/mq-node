@@ -42,7 +42,7 @@ mq.delete('test',{player:'Janna'},function(err,data){
 
 // return DELETE FROM test where player="Janna"
 
-mq.delete('test',['player:"Janna"','score=100'},function(err,data){
+mq.delete('test',{'player:"Janna"','score=100'},function(err,data){
 });
 
 // return DELETE FROM test where player="Janna" and score=100

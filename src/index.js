@@ -12,11 +12,15 @@ var strToArr = function(val){
 	return val;
 }
 
+var mysqlEscapeUnquoted = function(val){
+	return mysql.escape(val).slice(0,-1).substr(1)
+}
+
 var objToSQLArr = function(obj){
 	var r = [];
 	for(var i in obj){
 		if(_.isObject(obj[i]) || _.isArray(obj[i]) || _.isFunction(obj[i]) || _.isNaN(obj[i])) continue;
-		r.push(mysql.escape(i)+'='+mysql.escape(obj[i]));
+		r.push(mysqlEscapeUnquoted(i)+'='+mysql.escape(obj[i]));
 	}
 	return r;
 }
@@ -36,7 +40,9 @@ module.exports = function(auth){
 	self.escape = mysql.escape;
 
 	self.query = function(sql,callback=null){
+
 		c.query(sql,function(err,data){
+
 			if(err) console.log(sql+" "+err);
 			if(callback) callback.apply(null,[err,data]);
 		});
