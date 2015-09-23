@@ -1,0 +1,25 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'uninstall',
+1 verbose cli   'heroesofsoccer' ]
+2 info using npm@2.5.1
+3 info using node@v0.12.0
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose unbuild node_modules\heroesofsoccer
+6 verbose gentlyRm vacuuming C:\Users\Andre\mq-node\node_modules\heroesofsoccer
+7 silly gentlyRm purging C:\Users\Andre\mq-node\node_modules\heroesofsoccer
+8 verbose stack Error: EBUSY, unlink 'C:\Users\Andre\mq-node\node_modules\heroesofsoccer\src'
+8 verbose stack     at Error (native)
+9 verbose cwd C:\Users\Andre\mq-node
+10 error Windows_NT 6.3.9600
+11 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "uninstall" "heroesofsoccer"
+12 error node v0.12.0
+13 error npm  v2.5.1
+14 error path C:\Users\Andre\mq-node\node_modules\heroesofsoccer\src
+15 error code EBUSY
+16 error errno -4082
+17 error EBUSY, unlink 'C:\Users\Andre\mq-node\node_modules\heroesofsoccer\src'
+18 error If you need help, you may report this error at:
+18 error     <http://github.com/npm/npm/issues>
+19 verbose exit [ -4082, true ]
