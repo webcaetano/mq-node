@@ -119,6 +119,17 @@ describe('mysql test', function() {
 		})
 	});
 
+	it('should output an object', function(done) {
+		mysql.select({
+			from:'test',
+			cols:['player','goal','id'],
+			where:{player:'Twitch'}
+		},function(err,data){
+			expect(data).to.be.an('object');
+			done();
+		},{single:true})
+	});
+
 
 	it('should drop table', function(done) {
 		mysql.query('DROP TABLE test',function(err,data){

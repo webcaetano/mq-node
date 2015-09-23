@@ -95,7 +95,7 @@ module.exports =
 
   		c.query(options ? _.extend({}, { sql: sql }, options) : sql, function (err, data) {
   			if (err || options && options.debug) console.log(sql + " " + err);
-  			if (callback) callback.apply(null, [err, data]);
+  			if (callback) callback.apply(null, [err, options && options.single ? data[0] : data]);
   		});
   		return self;
   	};

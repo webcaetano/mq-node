@@ -120,6 +120,16 @@ mq.select({
 })
 ```
 
+## Single Row
+
+mq.select({
+	from:'test',
+	cols:['player','goal','id'],
+	where:{player:'Janna'}
+},function(err,data){
+},{single: true}) // output just one row as object
+```
+
 ## Nest Tables Result (optional)
 
 ```
