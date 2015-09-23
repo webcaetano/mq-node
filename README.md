@@ -128,6 +128,16 @@ mysql.query('SELECT t1.name,t2.name FROM players as t1, teams as t2 WHERE t2.id=
 },{nestTables: true})
 ```
 
+## Debug Query
+
+```
+mysql.select({
+	from:'test',
+	cols:['player','goal','id'],
+	where:{player:'Janna'}
+},{debug: true}) // console.log -> SELECT player, goal, id, FROM test WHERE player="Janna";
+```
+
 ## Node mysql object 
 
 mq.connection
