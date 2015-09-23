@@ -65,11 +65,11 @@ module.exports = function(options) {
 			__filename: false,
 			__dirname: false
 		},
-		devtool: DEBUG ? 'source-map' : 'cheap-module-source-map',
+		// devtool: DEBUG ? 'source-map' : 'cheap-module-source-map',
 		plugins: config.plugins.concat(
-			new webpack.DefinePlugin(merge(GLOBALS, {'__SERVER__': true})),
-			new webpack.BannerPlugin('require("source-map-support").install();',
-				{ raw: true, entryOnly: false })
+			new webpack.DefinePlugin(merge(GLOBALS, {'__SERVER__': true}))
+			// new webpack.BannerPlugin('require("source-map-support").install();',
+			// 	{ raw: true, entryOnly: false })
 		),
 		module: {
 			loaders: [

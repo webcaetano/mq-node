@@ -1,4 +1,3 @@
-require("source-map-support").install();
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -136,10 +135,6 @@ module.exports =
   			limit: { head: 'LIMIT', separator: ', ' }
   		};
 
-  		reqCols = _.clone(data.cols);
-  		data.cols = flattenDeepToArr(data.cols);
-  		var nested = JSON.stringify(reqCols) != JSON.stringify(data.cols);
-
   		for (var i in attrs) {
   			if (!data[i]) continue;
   			if (attrs[i].obj && _.isPlainObject(data[i])) data[i] = objToSQLArr(data[i]);
@@ -180,4 +175,3 @@ module.exports =
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=index.js.map
