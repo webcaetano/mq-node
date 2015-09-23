@@ -16,30 +16,6 @@ var mysqlEscapeUnquoted = function(val){
 	return mysql.escape(val).slice(0,-1).substr(1)
 }
 
-var flattenDeepToArr = function(arr){
-	if(_.isPlainObject(arr)) arr = _.values(arr);
-
-	for(var i in arr) if(_.isPlainObject(arr[i])) arr[i] = flattenDeepToArr(arr[i]);
-	return _.flatten(arr);
-}
-
-var dataAsNested = function(data,schema){
-	console.log(data,schema);
-	var resp = [];
-	for(var i in data){
-		resp[i]={};
-		for(var a in schema){
-			if(_.isPlainObject(schema[a])){
-
-			} else {
-				resp[i][schema[a]]=data[i][schema[a]];
-			}
-		}
-	}
-	console.log(resp);
-	return resp;
-}
-
 var objToSQLArr = function(obj){
 	var r = [];
 	for(var i in obj){
@@ -63,35 +39,35 @@ module.exports = function(auth){
 
 	self.escape = mysql.escape;
 
-	self.query = function(sql,callback=null,debug=false){
+	self.query = function(sql,callback=null,options=null){
 
-		c.query(sql,function(err,data){
-			if(err || debug) console.log(sql+" "+err);
+		c.query((options ? _.extend({},{sql:sql},options) : sql),function(err,data){
+			if(err || (options && options.debug)) console.log(sql+" "+err);
 			if(callback) callback.apply(null,[err,data]);
 		});
 		return self;
 	}
 
-	self.insert = function(table,set,callback=null,debug=false){
+	self.insert = function(table,set,callback=null,options=null){
 		if(_.isPlainObject(set)) set = objToSQLArr(set);
 		self.query([
 			"INSERT INTO "+countAdd('',strToArr(table)),
 			"SET "+countAdd('',strToArr(set))
-		].join(" "),callback,debug);
+		].join(" "),callback,options);
 		return self;
 	}
 
-	self.delete = function(table,where,callback=null,debug=false){
+	self.delete = function(table,where,callback=null,options=null){
 		if(_.isPlainObject(where)) where = objToSQLArr(where);
 		self.query([
 			'DELETE FROM '+countAdd('',strToArr(table)),
 			countAdd('WHERE',strToArr(where),' and ')
-		].join(" "),callback,debug);
+		].join(" "),callback,options);
 		return self;
 	}
 
 
-	self.select = function(data={},callback=null,debug=false){
+	self.select = function(data={},callback=null,options=null){
 		var sql=[];
 		var reqCols;
 		var attrs = {
@@ -114,14 +90,11 @@ module.exports = function(auth){
 			var tmpVal = countAdd(attrs[i]['head'],strToArr(data[i]),attrs[i]['separator']);
 			if(tmpVal && tmpVal.length) sql.push(tmpVal);
 		}
-		self.query(sql.join(" "),function(err,data){
-			if(nested) data = dataAsNested(data,reqCols);
-			callback(err,data);
-		},debug);
+		self.query(sql.join(" "),callback,options);
 		return self;
 	}
 
-	self.update = self.set = function(table,set,where=null,callback=null,debug=false){
+	self.update = self.set = function(table,set,where=null,callback=null,options=null){
 		if(_.isPlainObject(set)) set = objToSQLArr(set);
 		if(_.isPlainObject(where)) where = objToSQLArr(where);
 		var sql = [
@@ -129,7 +102,7 @@ module.exports = function(auth){
 			'SET '+countAdd('',strToArr(set))
 		];
 		if(where && where.length) sql.push(countAdd('WHERE',strToArr(where),' and '));
-		self.query(sql.join(" "),callback,debug);
+		self.query(sql.join(" "),callback,options);
 		return self;
 	}
 
