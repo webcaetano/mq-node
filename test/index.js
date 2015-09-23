@@ -47,7 +47,7 @@ describe('mysql test', function() {
 
 	it('should insert 5 rows', function(done) {
 		var players = [
-			{player:'theOddOne',goal:150},
+			{player:'Twitch',goal:150},
 			{player:'Darius',goal:100},
 			{player:'Lulu',goal:80},
 			'player="Janna", goal=50',
@@ -111,9 +111,9 @@ describe('mysql test', function() {
 		mysql.select({
 			from:'test',
 			cols:['player','goal','id'],
-			where:{player:'theOddOne'}
+			where:{player:'Twitch'}
 		},function(err,data){
-			expect(data[0]['player']).to.be.equal('theOddOne');
+			expect(data[0]['player']).to.be.equal('Twitch');
 			// expect(data[0]['goal']).to.be.equal(200);
 			done();
 		})

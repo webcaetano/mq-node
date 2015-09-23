@@ -120,6 +120,24 @@ mq.select({
 })
 ```
 
+## Nest Tables Result (optional)
+
+```
+mysql.query('SELECT t1.name,t2.name FROM players as t1, teams as t2 WHERE t2.id=t1.team',function(err,data){
+	// result example : [ { t1: { name: 'Distillers 345' }, t2: { name: 'Heroes Team' } } ]
+},{nestTables: true})
+```
+
+## Debug Query
+
+```
+mysql.select({
+	from:'test',
+	cols:['player','goal','id'],
+	where:{player:'Janna'}
+},{debug: true}) // console.log -> SELECT player, goal, id, FROM test WHERE player="Janna";
+```
+
 ## Node mysql object 
 
 mq.connection
