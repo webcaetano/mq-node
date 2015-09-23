@@ -122,6 +122,7 @@ mq.select({
 
 ## Single Row
 
+```
 mq.select({
 	from:'test',
 	cols:['player','goal','id'],
