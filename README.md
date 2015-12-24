@@ -159,6 +159,8 @@ mq.connection
 npm install mq-node
 ```
 
+[![npm](https://nodei.co/npm/mq-node.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/mq-node)
+
 ---------------------------------
 
 The MIT [License](https://raw.githubusercontent.com/webcaetano/mq-node/master/LICENSE.md)
